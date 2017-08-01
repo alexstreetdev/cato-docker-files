@@ -10,9 +10,9 @@ WORKDIR app
 
 RUN git clone https://github.com/alexstreetdev/cato-camera-movement
 
-ENV input_url
-ENV output_url
-ENV camera_name
-ENV threshold
+ENV input_url=''
+ENV output_url=''
+ENV camera_name='camera'
+ENV threshold=10000
 
 CMD ["python", "./cato-camera-movement/cato-camera-movement.py -i ${input_url} -o ${output_url} -n ${camera_name} -t ${threshold}"]
