@@ -13,4 +13,8 @@ RUN git clone https://github.com/alexstreetdev/cato-camera-store
 
 EXPOSE 5001
 
-CMD ["python", "./cato-camera-store/cato-camera-store.py"]
+WORKDIR cato-camera-store
+
+RUN ls
+
+CMD python cato-camera-store.py

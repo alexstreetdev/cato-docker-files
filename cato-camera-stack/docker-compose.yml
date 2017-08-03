@@ -1,0 +1,20 @@
+version: '2'
+services:
+  camera:
+    image: alexstreet/cato-camera:jessie
+    ports:
+     - "8080:8080"
+    privileged: true
+  store:
+    image: alexstreet/cato-camera-store:arm6
+    ports:
+     - "5001:5001"
+  movement:
+    image: alexstreet/cato-camera-movement:arm6
+    depends_on:
+     - camera
+     - store
+    environment:
+     - input_url=http://192.168.112.108:8080/?action=snapshot
+     - output_url=http://192.168.112.108:5001/movement/
+     - camera_name=cam1
