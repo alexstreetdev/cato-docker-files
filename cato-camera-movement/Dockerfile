@@ -17,9 +17,8 @@ ENV input_url='http://192.168.0.47:8080/?action=stream'
 ENV output_url='http://192.168.0.44:5001/movement/'
 ENV camera_name='camera'
 ENV threshold=10000
-ENV mqenabled='Y'
+ENV mqenabled='N'
 ENV mqserver='127.0.0.1'
 ENV mqq='hello'
 
-CMD python -u ./cato-camera-movement/cato-camera-movement3.py -i ${input_url} -o ${output_url} -n ${camera_name} -t ${threshold} 
-# -r ${mqenabled} -s ${mqserver} -q ${mqq}
+CMD python -u ./cato-camera-movement/cato-camera-movement3.py -i ${input_url} -o ${output_url} -n ${camera_name} -t ${threshold} -r ${mqenabled} -s ${mqserver} -q ${mqq}
