@@ -4,17 +4,20 @@ services:
     image: alexstreet/cato-camera:jessie
     ports:
      - "8080:8080"
+    network_mode: host
     privileged: true
-  store:
-    image: alexstreet/cato-camera-store:arm6
-    ports:
-     - "5001:5001"
+    restart: always
   movement:
-    image: alexstreet/cato-camera-movement:arm6
+    image: alexstreet/cato-camera-movement:v4
+    network_mode: host
     depends_on:
      - camera
-     - store
     environment:
-     - input_url=http://192.168.112.108:8080/?action=snapshot
-     - output_url=http://192.168.112.108:5001/movement/
+     - input_url=http://192.168.0.1:8080/?action=snapshot
+     - output_url=http://192.168.0.1:5001/api/image/
      - camera_name=cam1
+     - threshold=10000
+     - mqenabled=Y
+     - mqserver=192.168.0.1
+     - mqq=msg_gateway
+    restart:always
