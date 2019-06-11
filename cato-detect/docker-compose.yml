@@ -1,0 +1,10 @@
+version: '2'
+services:
+  app:
+    image: alexstreet/cato-detect
+    network_mode: host
+    environment:
+      - rabbitmq_host=192.168.0.43
+      - username=vision
+      - password=vision
+    restart: always
