@@ -1,13 +1,14 @@
-FROM alexstreet/opencv-base
+FROM alexstreet/opencv-base:3.4.4headless
 
-RUN sudo apt-get update
+RUN sudo apt-get update && apt-get install -y \
+ git \
+ python3-pip
 
-RUN sudo apt-get install python-pip
-
-RUN pip install imutils
-
-RUN pip install pika
-RUN pip install jsonpickle
+RUN pip3 install \
+ imutils \
+ pika \
+ jsonpickle \
+ requests
 
 WORKDIR app
 
@@ -21,4 +22,4 @@ ENV mqenabled='N'
 ENV mqserver='127.0.0.1'
 ENV mqq='hello'
 
-CMD python -u ./cato-camera-movement/cato-camera-movement3.py -i ${input_url} -o ${output_url} -n ${camera_name} -t ${threshold} -r ${mqenabled} -s ${mqserver} -q ${mqq}
+CMD python3 -u ./cato-camera-movement/cato-camera-movement5.py -i ${input_url} -o ${output_url} -n ${camera_name} -t ${threshold} -r ${mqenabled} -s ${mqserver} -q ${mqq}
